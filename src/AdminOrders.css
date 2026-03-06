@@ -1,0 +1,233 @@
+/* Order Specific Styles */
+.filter-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.filter-tab {
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.filter-tab.active {
+    background: var(--text);
+    color: white;
+    border-color: var(--text);
+}
+
+.order-row {
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 0.5fr; /* Custom spacing */
+}
+
+.order-meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.empty-state-container{
+    background-color: #ecedef44;
+    color: #525456;
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #bbb;
+    border-radius: 14px;
+    padding: 72px;
+}
+.empty-icon-bg{
+    font-size: 34px;
+    color: #aaa;
+    margin-bottom: 24px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Status Colors */
+.status-pill.pending { background: #fff8e6; color: #ffa000; }
+.status-pill.shipping { background: #e6f4ff; color: #0070f3; }
+.status-pill.delivered { background: #e6fff3; color: #00ca6d; }
+
+.order-id-block h3 {
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+
+.orders-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.order-card-premium-admin{
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 0.8fr;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  cursor: pointer;
+}
+
+.order-card-premium {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  cursor: pointer;
+}
+
+.order-card-premium:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  border-color: #e0e0e0;
+}
+
+/* Customer Info */
+.order-main-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.customer-avatar-circle {
+  width: 44px;
+  height: 44px;
+  background: #f4f4f4;
+  color: #555;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid #eee;
+}
+
+.order-ref {
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.customer-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Stats Group */
+.stat-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-icon { color: #bbb; }
+
+.stat-texts label {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-texts span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Status Tags */
+.status-indicator-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-indicator-tag.pending { background: #fff7ed; color: #c2410c; }
+.status-indicator-tag.paid { background: #f0fdf4; color: #15803d; }
+.status-indicator-tag.delivered { background: #f0f9ff; color: #0369a1; }
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Finance */
+.order-finance label {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.amount-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+/* Actions */
+.view-details-btn {
+  background: #f8f8f8;
+  border: 1px solid #eee;
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #555;
+  font-weight: 600;
+}
+
+.view-details-btn:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}

@@ -1,0 +1,118 @@
+.notifications-container {
+    margin-top: 100px;
+    max-width: 800px;
+}
+
+.notif-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.notif-card {
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    background: white;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.notif-card:hover {
+    transform: translateX(5px);
+    border-color: var(--accent);
+}
+
+.notif-card.unread {
+    background: #f0fffa;
+    border-left: 4px solid var(--accent);
+}
+
+.notif-icon-wrapper {
+    margin-right: 18px;
+}
+
+.nt-icon {
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    border-radius: 14px;
+}
+
+/* Notification Types Styling */
+.nt-icon.order { background: #eef2ff; color: #6366f1; }
+.nt-icon.alert { background: #fff1f2; color: #f43f5e; }
+.nt-icon.success { background: #f0fdf4; color: #22c55e; }
+.nt-icon.info { background: #f8fafc; color: #64748b; }
+
+.notif-content {
+    flex: 1;
+}
+
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.notif-header h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.notif-time {
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.notif-content p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+.notif-delete {
+    opacity: 0;
+    background: none;
+    border: none;
+    color: #f43f5e;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 8px;
+}
+
+.notif-card:hover .notif-delete {
+    opacity: 1;
+}
+
+.empty-notif {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 0;
+    color: var(--text-dim);
+}
+
+.clear-all-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.hub-header-notif{
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+}

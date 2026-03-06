@@ -1,0 +1,142 @@
+.product-page {
+  background: #ffffff;
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.p-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 80px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.p-icon-btn {
+  width: 48px; height: 48px; border-radius: 50%; border: 1px solid #eee;
+  background: white; cursor: pointer; display: grid; place-items: center;
+  transition: 0.2s;
+}
+.p-icon-btn:hover { border-color: #121212; background: #fafafa; }
+.p-header-actions { display: flex; gap: 12px; }
+
+.p-layout {
+  display: grid;
+  grid-template-columns: 1fr 450px; 
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 60px;
+  padding: 20px 40px 40px;
+}
+
+.p-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0; 
+}
+
+.p-main-view {
+  aspect-ratio: 4/5;
+  background: #f7f7f7;
+  border-radius: 32px;
+  overflow: hidden;
+  width: 100%; 
+  height: 75vh;
+}
+
+.p-main-view img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+.p-thumbs {
+  width: 100%; 
+  overflow-x: auto; 
+  padding: 10px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.p-thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+.p-thumbs::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 10px;
+}
+
+.images-flow {
+  display: flex;
+  gap: 12px;
+  width: max-content; 
+}
+
+.p-thumb {
+  width: 90px; 
+  height: 90px; 
+  flex-shrink: 0; 
+  border-radius: 18px; 
+  overflow: hidden;
+  cursor: pointer; 
+  border: 2px solid transparent; 
+  transition: all 0.2s ease;
+  opacity: 0.5;
+}
+
+.p-thumb.active { border-color: #121212; opacity: 1; transform: translateY(-4px); }
+.p-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.p-info { min-width: 0; }
+
+.p-sticky-content {
+  position: sticky;
+  top: 100px; 
+}
+
+.p-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.p-tag { font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #888; }
+.p-rating { background: #121212; color: white; padding: 4px 10px; border-radius: 100px; font-size: 12px; display: flex; align-items: center; gap: 4px; }
+
+.p-title { font-size: 42px; font-weight: 900; line-height: 1.1; margin-bottom: 10px; letter-spacing: -1px; }
+.p-price { font-size: 28px; font-weight: 400; color: #121212; margin-bottom: 30px; }
+.p-description { font-size: 16px; color: #666; line-height: 1.6; margin-bottom: 40px; }
+
+.p-actions-grid {
+  display: flex; gap: 15px; margin-bottom: 40px;
+}
+
+.p-qty-selector {
+  display: flex; align-items: center; background: #f5f5f5; border-radius: 18px; padding: 8px; gap: 15px;
+}
+.p-qty-selector button { width: 36px; height: 36px; border-radius: 12px; border: none; background: white; cursor: pointer; display: grid; place-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.p-qty-selector span { font-weight: 800; font-size: 16px; min-width: 30px; text-align: center; }
+
+.p-buy-btn {
+  flex: 1; background: #121212; color: white; border: none; border-radius: 18px;
+  font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center;
+  gap: 10px; cursor: pointer; transition: 0.3s; padding: 18px;
+}
+.p-buy-btn:hover { background: #333; }
+
+.p-trust-badges { display: flex; gap: 24px; padding-top: 30px; border-top: 1px solid #eee; }
+.p-badge { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #444; }
+
+@media (max-width: 1024px) {
+  .p-layout {
+    grid-template-columns: 1fr;
+    padding: 0 20px 100px;
+    gap: 30px;
+  }
+  .p-header { padding: 0 20px; height: 70px; }
+  .p-main-view { border-radius: 24px; aspect-ratio: 1/1; height: auto;}
+  .p-sticky-content { position: relative; top: 0; }
+  .p-title { font-size: 32px; }
+  .p-actions-grid {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white; padding: 20px; border-top: 1px solid #eee;
+    margin-bottom: 0; z-index: 1000; box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+  }
+}
+
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }

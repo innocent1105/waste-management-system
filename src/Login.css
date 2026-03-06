@@ -1,0 +1,149 @@
+.login-split-page {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: white;
+}
+
+/* LEFT BLACK HALF */
+.auth-brand-half {
+  flex: 1; /* This takes exactly 50% */
+  background: #03291e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background glow to make the black pop */
+.auth-brand-half::after {
+  content: '';
+  position: absolute;
+  top: -10%; right: -10%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+}
+
+.brand-content-box {
+  max-width: 480px;
+  color: white;
+}
+
+.logo-square {
+  width: 64px; height: 64px; background: white; color: black;
+  border-radius: 20px; display: grid; place-items: center; margin-bottom: 40px;
+}
+
+.text-group h1 { font-size: 56px; font-weight: 900; line-height: 1.1; letter-spacing: -2px; }
+.text-group p { font-size: 18px; color: #888; margin-top: 24px; line-height: 1.6; }
+
+.brand-badge-row { display: flex; gap: 12px; margin-top: 60px; }
+.badge-pill { 
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 600; 
+  display: flex; align-items: center; gap: 8px; color: #aaa;
+}
+
+/* RIGHT FORM HALF */
+.auth-form-half {
+  flex: 1; /* This takes the other 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.form-container-limit {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header h2 { font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+.auth-header p { color: #888; margin-top: 8px; font-size: 15px; }
+.link-text { color: #121212; font-weight: 700; cursor: pointer; text-decoration: underline; }
+
+.auth-form-main { margin-top: 40px; }
+.input-block { margin-bottom: 24px; }
+.label-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.input-block label { font-size: 13px; font-weight: 800; color: #333; }
+.forgot-trigger { font-size: 12px; font-weight: 700; color: #888; cursor: pointer; }
+
+.field-wrapper { position: relative; display: flex; align-items: center; }
+.field-icon { position: absolute; left: 16px; color: #aaa; }
+
+.field-wrapper input {
+  width: 100%; padding: 16px 16px 16px 48px; border-radius: 16px;
+  border: 1.5px solid #eee; background: #fafafa; font-size: 15px; outline: none; transition: 0.3s;
+}
+.field-wrapper input:focus { border-color: #121212; background: white; }
+
+.eye-toggle { position: absolute; right: 16px; background: none; border: none; color: #aaa; cursor: pointer; }
+
+.login-trigger {
+  width: 100%; background: #121212; color: white; padding: 18px; border-radius: 18px;
+  border: none; font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+
+.social-divider { margin: 30px 0; text-align: center; border-bottom: 1px solid #eee; line-height: 0.1em; }
+.social-divider span { background: white; padding: 0 15px; font-size: 11px; font-weight: 800; color: #bbb; }
+
+.google-auth-btn {
+  width: 100%; padding: 16px; border-radius: 16px; border: 1.5px solid #eee;
+  background: white; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;
+  cursor: pointer; transition: 0.2s;
+}
+.google-auth-btn img { width: 18px; }
+.google-auth-btn:hover { background: #f9f9f9; border-color: #121212; }
+
+/* RESPONSIVE LOGIC */
+@media (max-width: 1024px) {
+  .auth-brand-half { display: none; } /* On mobile, only the form matters */
+  .auth-form-half { flex: 1; }
+}
+
+
+/* Error State Styling */
+.input-block.has-error input {
+  border-color: #ff4d4d !important;
+  background-color: #fff5f5 !important;
+}
+
+.input-block.has-error .field-icon {
+  color: #ff4d4d !important;
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff4d4d;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+  animation: slideIn 0.3s ease;
+}
+
+.auth-footer-note {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+}
+
+/* Spinner Animation */
+.spinner {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,156 @@
+
+
+.otp-icon-circle {
+  width: 70px;
+  height: 70px;
+  background: #f9f9f9;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+  color: #121212;
+  border: 1.5px solid #eee;
+}
+
+.otp-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.otp-field {
+  width: 55px;
+  height: 65px;
+  border-radius: 16px;
+  border: 1.5px solid #c4c4c4;
+  background: #fafafa;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #121212;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.otp-field:focus {
+  border-color: #121212;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
+
+.otp-footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.otp-footer p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.resend-btn {
+  background: none;
+  border: none;
+  color: #121212;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: 0.2s;
+}
+
+.resend-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.resend-btn:not(:disabled):hover {
+  background: #f5f5f5;
+}
+
+.spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile Tweak */
+@media (max-width: 600px) {
+  .otp-field {
+    width: 45px;
+    height: 55px;
+    font-size: 20px;
+  }
+}
+
+/* ADD THESE TO YOUR EXISTING VerifyOTP.css */
+
+.otp-icon-circle.loading-pulse {
+  border-color: #121212;
+  background: #fff;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.otp-icon-circle.error-shake {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+  background: #fff5f5;
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.otp-input-wrapper.error-state .otp-field {
+  border-color: #ff4d4d;
+  background: #fff5f5;
+  color: #ff4d4d;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff4d4d;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: -20px;
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+.otp-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ANIMATIONS */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

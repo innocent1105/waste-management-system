@@ -1,0 +1,166 @@
+.prompt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+.step-text{
+  color: #1a1a1a;
+}
+.small-text{
+  font-size: 14px;
+  color: #888;
+}
+.prompt-card {
+  background: #fff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 35px;
+  padding: 40px 30px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.close-prompt {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Phone & Pulse Animation */
+.phone-visual {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.phone-icon {
+  color: #1a1a1a;
+  z-index: 2;
+  animation: shake 2s cubic-bezier(.36,.07,.19,.97) infinite;
+}
+
+.pulse-circles .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.c1 { width: 60px; height: 60px; animation: pulse 3s infinite; }
+.c2 { width: 60px; height: 60px; animation: pulse 3s 1s infinite; }
+.c3 { width: 60px; height: 60px; animation: pulse 3s 2s infinite; }
+
+.prompt-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.instruction-box {
+  background: #f9f9f9;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.step:last-child { margin-bottom: 0; }
+
+.step-num {
+  background: #000;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.amount-pill {
+  display: inline-block;
+  background: #e6f7ed;
+  color: #1b854a;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.prompt-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.timer-ring {
+  width: 45px;
+  height: 45px;
+  border: 3px solid #eee;
+  border-top-color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  animation: spin 1s linear infinite;
+}
+
+.timer-ring span { animation: reverse-spin 1s linear infinite; }
+
+@keyframes pulse {
+  0% { width: 60px; height: 60px; opacity: 0.5; }
+  100% { width: 150px; height: 150px; opacity: 0; }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes reverse-spin { to { transform: rotate(-360deg); } }
+
+.security-note {
+  margin-top: 25px;
+  color: #ccc;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  letter-spacing: 0.5px;
+}

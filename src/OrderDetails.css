@@ -1,0 +1,230 @@
+/* Layout & Grid */
+.details-page {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fcfcfc;
+  min-height: 100vh;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-circle:hover {
+  background: #000;
+  color: #fff;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 30px;
+}
+
+/* Info Cards */
+.info-card {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid #f0f0f0;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 15px;
+}
+
+.card-header h2, .card-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Items Table */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.items-table th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  padding-bottom: 15px;
+}
+
+.items-table td {
+  padding: 15px 0;
+  border-bottom: 1px solid #fafafa;
+  font-size: 15px;
+  color: #444;
+}
+
+.item-cell {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.item-cell img {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f9f9f9;
+}
+
+/* Footer Totals */
+.order-total-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #f9f9f9;
+}
+
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.total-row.grand {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+/* Customer Info Grid */
+.customer-info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Sidebar & Management */
+.status-manager {
+  position: sticky;
+  top: 40px;
+  background: #ffffff;
+}
+
+.status-current label, .status-updater label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #aaa;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Status Colors */
+.status-tag.pending { background: #fff7ed; color: #c2410c; }
+.status-tag.paid { background: #f0fdf4; color: #15803d; }
+.status-tag.cancelled { background: #fef2f2; color: #dc2626; }
+.status-tag.shipped { background: #eff6ff; color: #1d4ed8; }
+
+.status-updater select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.helper-text {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-secondary {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-danger {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #ffe4e6;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: #e11d48;
+  color: white;
+}
+.loading-update-status{
+    padding: 10px;
+}
+@media print {
+  .details-sidebar, .header-actions, .back-circle {
+    display: none !important;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

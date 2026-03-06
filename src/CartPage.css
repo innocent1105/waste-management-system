@@ -1,0 +1,163 @@
+.cart-page-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: var(--bg);
+}
+
+/* Header & Progress Stepper */
+.cart-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.checkout-steps {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.step { font-size: 13px; font-weight: 700; color: #ccc; }
+.step.active { color: var(--accent); }
+.step-line { width: 40px; height: 2px; background: #eee; }
+
+/* Layout Grid */
+.cart-main-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Left Column */
+.column-head h1 { font-size: 42px; font-weight: 900; letter-spacing: -1.5px; }
+.column-head p { color: var(--text-dim); margin-top: 5px; margin-bottom: 40px; }
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.item-img-box img {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  object-fit: cover;
+  background: #f9f9f9;
+}
+
+.item-info-box { flex: 1; }
+.info-main h3 { font-size: 18px; margin-bottom: 4px; }
+.info-main p { color: var(--text-dim); font-size: 14px; margin-bottom: 15px; }
+
+.item-controls { display: flex; align-items: center; gap: 20px; }
+
+.qty-picker {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 6px;
+  border-radius: 12px;
+  gap: 15px;
+}
+
+.qty-picker button {
+  width: 28px; height: 28px; border-radius: 8px; border: none;
+  background: white; cursor: pointer; display: grid; place-items: center;
+}
+
+.remove-icon-btn {
+  color: #ff4d4d; border: none; background: #fff1f1;
+  padding: 8px; border-radius: 10px; cursor: pointer;
+}
+
+.item-price-box { text-align: right; min-width: 120px; }
+.item-price-box h4 { font-size: 20px; font-weight: 800; }
+.item-price-box p { font-size: 12px; color: var(--text-dim); }
+
+.cart-guarantees {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.g-item { display: flex; align-items: center; gap: 10px; }
+
+/* Right Column: Summary Card */
+.summary-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  padding: 35px;
+  position: sticky;
+  top: 40px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+}
+
+.summary-card h3 { margin-bottom: 25px; font-size: 22px; font-weight: 800; }
+
+.promo-input-box {
+  display: flex; align-items: center; gap: 10px;
+  background: #f8f8f8; padding: 12px 15px; border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.promo-input-box input { border: none; background: none; outline: none; flex: 1; font-size: 14px; }
+.promo-input-box button { background: var(--text); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 12px; }
+
+.s-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-dim); font-weight: 500; }
+.summary-divider { height: 1px; background: var(--border); margin: 20px 0; }
+.s-row.total { color: var(--text); font-size: 24px; font-weight: 900; }
+.total-amount { color: var(--accent); }
+
+.checkout-btn {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 30px;
+  box-shadow: 0 10px 30px rgba(0, 202, 109, 0.2);
+  transition: 0.3s;
+}
+
+.checkout-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 202, 109, 0.3); }
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .cart-main-content { grid-template-columns: 1fr; gap: 40px; }
+  .summary-card { position: static; }
+}
+
+@media (max-width: 600px) {
+  .column-head h1 { font-size: 32px; }
+  .cart-item-row { flex-direction: column; align-items: flex-start; }
+  .item-img-box img { width: 100%; height: 200px; }
+  .item-price-box { text-align: left; margin-top: 15px; }
+  .checkout-steps { display: none; }
+}

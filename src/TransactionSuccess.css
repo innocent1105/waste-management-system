@@ -1,0 +1,161 @@
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fcfcfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  overflow: hidden;
+}
+
+.success-card {
+  background: white;
+  width: 90%;
+  max-width: 440px;
+  padding: 50px 40px;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+  z-index: 2;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Success Animation Visuals */
+.success-icon-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px;
+}
+
+.success-ring {
+  position: absolute;
+  inset: -10px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.success-check-bg {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  animation: scaleBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Text Content */
+.success-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.success-header p {
+  color: #888;
+  font-size: 15px;
+}
+
+/* Order Info Table */
+.order-details {
+  background: #f9f9f9;
+  border-radius: 24px;
+  padding: 20px;
+  margin: 30px 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.status-badge {
+  color: #1b854a;
+  background: #e6f7ed;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Actions */
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-primary {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 18px;
+  border-radius: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); }
+
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 1.5px solid #eee;
+  padding: 14px;
+  border-radius: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.success-footer {
+  margin-top: 30px;
+  color: #bbb;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleBounce {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(1.8); opacity: 0; }
+}
