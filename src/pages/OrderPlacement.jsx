@@ -195,7 +195,7 @@ const handlePlaceOrder = async () => {
                     <div className="step-row"><Truck size={16}/> <span>Truck arrives in ~25 mins</span></div>
                     <div className="step-row"><MapPin size={16}/> <span>{serviceDetails.location}</span></div>
                   </div>
-                  <button className="track-btn" onClick={() => navigate('/home')}>
+                  <button className="track-btn" onClick={() => navigate('/track')}>
                     Track Truck on Map
                   </button>
                 </div>
@@ -203,7 +203,6 @@ const handlePlaceOrder = async () => {
             </div>
           </div>
 
-          {/* SUMMARY SIDEBAR */}
           <div className="order-summary-section">
             <div className="summary-sticky">
               <h3 className="summary-title">Service Details</h3>

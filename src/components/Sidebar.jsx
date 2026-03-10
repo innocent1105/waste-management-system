@@ -1,4 +1,4 @@
-import { LayoutGrid, BarChart3, ShoppingCart, Users, Home, ListCheck, LayoutList, ListPlus, Zap, LogOut } from 'lucide-react';
+import { LayoutGrid, BarChart3, ShoppingCart, Users, Home,Van, ListCheck, LayoutList, ListPlus,MapPinHouse, Zap, LogOut } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from './Config';
@@ -9,7 +9,7 @@ const Sidebar = ({ active, cartItems }) => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { id: 'home', icon: LayoutGrid, path: '/', label: 'Dashboard' },
+    { id: 'home', icon: MapPinHouse, path: '/', label: 'Dashboard' },
     { id: 'transactions', icon: BarChart3, path: '/transactions', label: 'History' },
     { id: 'orders', icon: ShoppingCart, path: '/orders', label: 'Orders' },
     { id: 'profile', icon: Users, path: '/profile', label: 'Profile' },
@@ -20,7 +20,7 @@ const Sidebar = ({ active, cartItems }) => {
     { id: 'admin_panel', icon: Home, path: '/admin-dashboard', label: 'Admin' },
     { id: 'admin_transactions', icon: ListCheck, path: '/admin-transactions', label: 'Logs' },
     { id: 'admin_orders', icon: LayoutList, path: '/admin-orders', label: 'Manage' },
-    { id: 'admin-add-products', icon: ListPlus, path: '/admin-add-products', label: 'Add' },
+    // { id: 'admin-add-products', icon: ListPlus, path: '/admin-add-products', label: 'Add' },
   ];
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Sidebar = ({ active, cartItems }) => {
     <aside className="nav-sidebar">
       <div className="sidebar-brand" onClick={() => navigate('/')}>
         <div className="brand-icon">
-          <Zap size={22} fill="#00d084" color="#00d084"/>
+          <Van size={22} fill="#00d084" color="#00d084"/>
         </div>
       </div>
       

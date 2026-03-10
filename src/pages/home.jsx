@@ -17,7 +17,43 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
 
     // Get the user ID from localStorage (matching your logic)
+    
     const user_token = localStorage.getItem(API_BASE_URL.slice(8, 15)); 
+
+
+    const updateLocationInDB = async (lat, lng) => {
+    if (!user_token) return;
+
+    try {
+        // We use a simple POST request to send the coordinates
+        await axios.post(`${API_BASE_URL}/update_user_location.php`, {
+            user_id: user_token, // This is your token from localStorage
+            latitude: lat,
+            longitude: lng
+        });
+        console.log("GPS Synced to Cloud:", lat, lng);
+    } catch (error) {
+        console.error("Location Sync Error:", error);
+    }
+};
+
+// Hook to watch userPos and auto-submit when it changes
+useEffect(() => {
+    // Only update if coordinates are valid and not the default Lusaka center
+    if (userPos[0] !== -15.3975 && userPos[1] !== 28.3328) {
+        const timer = setTimeout(() => {
+            updateLocationInDB(userPos[0], userPos[1]);
+        }, 3000); // Throttle: Only send to DB every 3 seconds to save battery/data
+
+        return () => clearTimeout(timer);
+    }
+}, [userPos]);
+
+
+
+
+
+
 
     useEffect(() => {
         // 1. Get Location
@@ -65,10 +101,10 @@ export default function Home() {
                     <div className="header-right">
                         <h1 className="welcome-text-2">Waste <span className="text-green">Collection</span></h1>
                         <div className="action-pill">
-                            <button className="header-icon-btn"><Bell size={20} /><span className="notification-dot"></span></button>
-                            <button className="header-icon-btn"><Settings size={20} /></button>
+                            <button onClick={() => {navigate("/notifications")}} className="header-icon-btn"><Bell size={20} /><span className="notification-dot"></span></button>
+                            {/* <button className="header-icon-btn"><Settings size={20} /></button> */}
                             <div className="divider-v"></div>
-                            <div className="user-profile-group">
+                            <div onClick={() => {navigate("/profile")}} className="user-profile-group">
                                 <div className="avatar-frame">
                                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Albert" alt="User" />
                                 </div>

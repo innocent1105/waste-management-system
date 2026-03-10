@@ -20,7 +20,7 @@ import TransactionDetails from "./pages/TransactionDetails";
 import Notifications from "./pages/Notifications";
 import OrderPlacement from "./pages/OrderPlacement";
 import Track from "./pages/Track";
-
+import UserGps from "./pages/UserGps";
 function App() {
   return (
     <Routes>
@@ -32,6 +32,7 @@ function App() {
       <Route path="/order-details/:id" element={<OrderDetails />} />
       <Route path="/user-order-details/:id" element={<UserOrderDetails />} />
       <Route path="/track" element={<Track />} />
+      <Route path="/user-gps/:id" element={<UserGps />} />
 
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/transactions" element={<TransactionsScreen />} />

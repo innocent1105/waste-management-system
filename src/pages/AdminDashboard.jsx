@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { 
   Bell, TrendingUp, Users, Activity, DollarSign, 
-  ShoppingCart, RefreshCcw, ArrowUpRight, ArrowDownRight, CheckCircle
+  ShoppingCart, Truck, ArrowUpRight, ArrowDownRight, CheckCircle
 } from 'lucide-react';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, 
   Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend 
 } from 'recharts';
 import Sidebar from '../components/Sidebar';
-import '../AdminDashboard.css';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../components/Config';
 import axios from 'axios';
+import '../AdminDashboard.css';
 
 export default function AdminDashboard() {
-  const localStorageKey = "ecom-dashboard";
-  const [user_id, setUserId] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
@@ -23,6 +21,7 @@ export default function AdminDashboard() {
         revenue: 0, prevRevenue: 0, 
         orders: 0, prevOrders: 0,
         customers: 0, prevCustomers: 0,
+        drivers: 0,
         conversion: 0 
     },
     revenueHistory: [],
@@ -30,66 +29,41 @@ export default function AdminDashboard() {
     statusDistribution: []
   });
 
-  const COLORS = ['#00ca6d', '#eab308', '#ef4444'];
+  const COLORS = ['#00ca6d', '#f59e0b', '#ef4444']; // Success, Pending, Failed
 
-
-  
-  const auth = async (token) => {
-    try{
-      const res = await axios.post(`${API_BASE_URL}/auth_.php`, {
-        user_token : token
-      })
-      console.log(res.data);
-      const result = res.data;
-      if(result.success){
-        if (res.data.message === "un_auth") {
-          localStorage.clear();
-          navigate("/login");
-        }
-        if(result.role !== "ADMIN"){
-          navigate("/");
-        }
-      }
-    }catch(auth_error){
-      console.log(auth_error);
-    }
-  }
-  useEffect(() => {
-    const token = localStorage.getItem(API_BASE_URL.slice(8, 15));
-    if(!token) {
-      localStorage.clear();
-      navigate("/login");
-      return;
-    }
-    auth(token);
-    setUserId(token);
-  }, []);
-
-  
-
-
-  useEffect(() => {
-    const role = localStorage.getItem(`${API_BASE_URL.slice(8, 15)}-role`);
-    if (role !== "ADMIN") navigate("/login");
-    fetchDashboardData();
-  }, []);
-
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     try {
       setLoading(true);
       const res = await axios.get(`${API_BASE_URL}/admin_dashboard_stats.php`);
-      if (res.data.success) setData(res.data);
+      if (res.data.success) {
+        setData(res.data);
+      }
     } catch (err) {
       console.error("Dashboard fetch error", err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem(API_BASE_URL.slice(8, 15));
+    const role = localStorage.getItem(`${API_BASE_URL.slice(8, 15)}-role`);
+    
+    if (!token || role !== "ADMIN") {
+      localStorage.clear();
+      navigate("/login");
+      return;
+    }
+    
+    fetchDashboardData();
+  }, [navigate, fetchDashboardData]);
 
   const calculateChange = (current, previous) => {
     if (!previous || previous === 0) return 0;
     return (((current - previous) / previous) * 100).toFixed(1);
   };
+
+  if (loading) return <div className="loading-screen">Loading Intelligence...</div>;
 
   return (
     <div className="pos-wrapper">
@@ -98,48 +72,47 @@ export default function AdminDashboard() {
       <main className="main-hub">
         <header className="dashboard-header">
           <section className="hero-section">
-            <h1>Admin <span className="text-accent">Dashboard</span></h1>
-            <p>Financial Intelligence • Real-time</p>
+            <h1>Waste Management <span className="text-accent">Admin</span></h1>
+            <p>Platform Overview • {new Date().toLocaleDateString()}</p>
           </section>
         </header>
 
         <div className="metrics-grid">
           <MetricCard 
-            title="Wallet Balance" 
+            title="System Revenue" 
             value={`K${data.stats.revenue.toLocaleString()}`} 
             percent={calculateChange(data.stats.revenue, data.stats.prevRevenue)} 
             icon={<DollarSign size={20}/>} 
             color="#00ca6d"
           />
           <MetricCard 
-            title="Total Orders" 
+            title="Total Bookings" 
             value={data.stats.orders} 
             percent={calculateChange(data.stats.orders, data.stats.prevOrders)} 
             icon={<ShoppingCart size={20}/>} 
             color="#6366f1"
           />
           <MetricCard 
-            title="Total Customers" 
+            title="Active Buyers" 
             value={data.stats.customers} 
             percent={calculateChange(data.stats.customers, data.stats.prevCustomers)} 
             icon={<Users size={20}/>} 
             color="#8b5cf6"
           />
           <MetricCard 
-            title="Success Rate" 
-            value={`${data.stats.conversion}%`} 
-            percent={data.stats.conversion > 80 ? "Healthy" : "Check Gateway"} 
+            title="Fleet (Drivers)" 
+            value={data.stats.drivers} 
+            percent="Active" 
             isStaticText={true}
-            icon={<CheckCircle size={20}/>} 
+            icon={<Truck size={20}/>} 
             color="#f59e0b"
           />
         </div>
 
-        {/* MIDDLE SECTION: MAIN REVENUE CHART */}
         <div className="dashboard-grid-layout">
           <div className="chart-container full-width">
             <div className="chart-header">
-              <h3>Revenue Performance (Last 30 Days)</h3>
+              <h3>Collection Revenue (Last 30 Days)</h3>
             </div>
             <div style={{ width: '100%', height: 350 }}>
               <ResponsiveContainer>
@@ -161,12 +134,9 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* BOTTOM SECTION: NEW GRAPHS */}
         <div className="dashboard-grid-layout bottom-charts">
-          
-          {/* GRAPH 1: CUSTOMER GROWTH */}
           <div className="chart-container">
-            <h3>Customer Acquisition</h3>
+            <h3>User Acquisition</h3>
             <div style={{ width: '100%', height: 250 }}>
               <ResponsiveContainer>
                 <AreaChart data={data.customerGrowth}>
@@ -178,9 +148,8 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* GRAPH 2: TRANSACTION STATUS (PIE) */}
           <div className="chart-container">
-            <h3>Payment Health</h3>
+            <h3>Payment Status Breakdown</h3>
             <div style={{ width: '100%', height: 250 }}>
               <ResponsiveContainer>
                 <PieChart>
@@ -201,12 +170,13 @@ export default function AdminDashboard() {
               </ResponsiveContainer>
             </div>
           </div>
-
         </div>
       </main>
     </div>
   );
 }
+
+// Sub-components (CustomTooltip, MetricCard) remain the same as your original snippet
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {

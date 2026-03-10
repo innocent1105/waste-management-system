@@ -1,38 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Package, User, MapPin, CreditCard, Trash2, Save, Printer } from 'lucide-react';
+import { ArrowLeft, MapPin, Truck, Printer, Trash2, ClipboardList } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../components/Config';
 import '../OrderDetails.css';
 
 export default function OrderDetails() {
   const { id } = useParams();
-  const [user_id, setUserId] = useState(null);
   const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
-
-
   useEffect(() => {
-    const token = localStorage.getItem(API_BASE_URL.slice(8, 15));
-    if(!token) {
-        console.warn("No user found");
-        navigate("/login"); 
-    } else {
-        setUserId(token);
-    }
-    
     fetchOrderDetails();
   }, [id]);
 
   const fetchOrderDetails = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(`${API_BASE_URL}/get_order_details.php?id=${id}`);
+      console.log("Order details fetched:", res.data);
       setOrder(res.data);
     } catch (err) {
-      console.error("Fetch error", err);
+      console.error("Fetch Error:", err.response?.data || err.message);
     } finally {
       setLoading(false);
     }
@@ -41,29 +32,27 @@ export default function OrderDetails() {
   const updateStatus = async (newStatus) => {
     setUpdating(true);
     try {
-      await axios.post(`${API_BASE_URL}/update_order_status.php`, { id, status: newStatus, user_id });
-      setOrder({ ...order, order_status: newStatus });
-      alert("Status updated successfully!");
+      const res = await axios.post(`${API_BASE_URL}/update_order_status.php`, { id, status: newStatus });
+      setOrder(prev => ({ ...prev, order_status: newStatus }));
+      console.log("Status updated:", res.data);
+      console.log(id);
     } catch (err) {
-      alert("Failed to update status");
+      alert("Status update failed");
     } finally {
       setUpdating(false);
     }
   };
 
-  const deleteOrder = async () => {
-    if (window.confirm("Are you sure? This will permanently remove the order.")) {
-      try {
-        await axios.post(`${API_BASE_URL}/delete_order.php`, { id });
-        navigate('/admin-orders');
-      } catch (err) {
-        alert("Error deleting order");
-      }
-    }
-  };
-
+  // 1. Loading State
   if (loading) return <div className="loader-container"><div className="loader"></div></div>;
-  if (!order) return <div className="error-view">Order not found.</div>;
+
+  // 2. Error/Null State (CRITICAL: This prevents the 'Cannot read properties of null' crash)
+  if (!order) return (
+    <div className="error-view">
+      <h2>Request Not Found</h2>
+      <button onClick={() => navigate(-1)}>Back to Orders</button>
+    </div>
+  );
 
   return (
     <div className="details-page">
@@ -71,39 +60,31 @@ export default function OrderDetails() {
         <div className="header-left">
           <button onClick={() => navigate(-1)} className="back-circle"><ArrowLeft size={20}/></button>
           <div>
-            <h1>Order #{order.transaction_reference}</h1>
+            <h1>Request #{order.transaction_reference || order.order_id}</h1>
             <p>Placed on {new Date(order.created_at).toLocaleString()}</p>
           </div>
         </div>
         <div className="header-actions">
           <button className="btn-secondary" onClick={() => window.print()}><Printer size={18}/> Print</button>
-          <button className="btn-danger" onClick={deleteOrder}><Trash2 size={18}/> Delete Order</button>
         </div>
       </header>
 
       <div className="details-grid">
         <div className="details-main">
           <section className="info-card">
-            <div className="card-header"><Package size={20}/> <h2>Items Summary</h2></div>
+            <div className="card-header"><ClipboardList size={20}/> <h2>Collection Items</h2></div>
             <table className="items-table">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Qty</th>
-                  <th>Total</th>
+                  <th>Waste Category</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
                 </tr>
               </thead>
               <tbody>
                 {order.items?.map((item, idx) => (
                   <tr key={idx}>
-                    <td>
-                      <div className="item-cell">
-                        <img src={`${API_BASE_URL}/uploads/products/${item.img}`} alt="" />
-                        <span>{item.name}</span>
-                      </div>
-                    </td>
-                    <td>K{Number(item.unit_price).toLocaleString()}</td>
+                    <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>K{Number(item.subtotal).toLocaleString()}</td>
                   </tr>
@@ -111,56 +92,53 @@ export default function OrderDetails() {
               </tbody>
             </table>
             <div className="order-total-footer">
-              <div className="total-row"><span>Subtotal</span> <span>K{Number(order.total_amount).toLocaleString()}</span></div>
-              <div className="total-row grand"><span>Total</span> <span>K{Number(order.total_amount).toLocaleString()}</span></div>
+               <h3>Total: K{Number(order.total_amount).toLocaleString()}</h3>
             </div>
           </section>
 
           <div className="customer-info-row">
             <div className="info-card">
-              <div className="card-header"><User size={18}/> <h3>Customer</h3></div>
+              <h3>Customer Details</h3>
               <p><strong>{order.full_name}</strong></p>
               <p>{order.email}</p>
               <p>{order.phone}</p>
             </div>
             <div className="info-card">
-              <div className="card-header"><MapPin size={18}/> <h3>Shipping</h3></div>
-              <p>{order.shipping_address || "Address not provided"}</p>
+              <h3><MapPin size={18}/> Pickup Address</h3>
+              <p>{order.pickup_address || "No address provided"}</p>
             </div>
           </div>
         </div>
 
         <aside className="details-sidebar">
-          <section className="info-card status-manager">
-            <div className="card-header"><CreditCard size={18}/> <h3>Management</h3></div>
-            
-            <div className="status-current">
-              <label>Current Status</label>
-              <div className={`status-tag ${order.order_status.toLowerCase()}`}>{order.order_status}</div>
+          <div className="info-card status-manager">
+            <h3><Truck size={18}/> Manage Request</h3>
+            <div className={`status-tag ${order.order_status.toLowerCase()}`}>
+                {order.order_status}
             </div>
+            <select 
+              value={order.order_status} 
+              onChange={(e) => updateStatus(e.target.value)}
+              disabled={updating}
+            >
+              {['PENDING', 'PAID', 'ASSIGNED', 'IN_TRANSIT', 'COLLECTED', 'CANCELLED'].map(s => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
 
-            {updating ? (
-                <div className='loading-update-status'>
-                    Updating status...
-                </div>
-            ) : (
-                <div className="status-updater">
-                    <label>Update Status</label>
-                    <select 
-                        value={order.order_status} 
-                        onChange={(e) => updateStatus(e.target.value)}
-                        disabled={updating}
-                    >
-                        {['PENDING', 'PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'].map(s => (
-                        <option key={s} value={s}>{s}</option>
-                        ))}
-                    </select>
-                    <p className="helper-text">Changing status will notify the customer via email.</p>
-                </div>
-            )}
-          
+          <div className="info-card status-manager">
+            <h3>Open GPS</h3>
+            <br></br>
+            <button className="btn-secondary" onClick={() => {
+                const address = encodeURIComponent(order.pickup_address);
+                navigate(`/user-gps/${order.user_id}`);
+              }
+            }>
+              <MapPin size={18}/> View on Map
+            </button>
+          </div>
 
-          </section>
         </aside>
       </div>
     </div>
