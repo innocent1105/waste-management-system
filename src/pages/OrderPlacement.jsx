@@ -49,6 +49,7 @@ const handlePlaceOrder = async () => {
         amount: serviceDetails.price
       });
 
+      console.log("Place Order Response:", res.data);
       if (res.data.success) {
         setOrderStatus('awaiting_payment'); 
         startPaymentVerification(res.data.transaction_reference, res.data.order_id);

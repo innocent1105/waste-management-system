@@ -29,7 +29,7 @@ const handleSubmit = async (e) => {
     const response = await axios.post(`${API_BASE_URL}/register.php`, formData);
     console.log(response.data);
     if (response.data.success) {
-        navigate('/verify-otp', { 
+        navigate('/login', { 
             state: { email: formData.email, username: formData.full_name } 
         });
     } else {
@@ -49,12 +49,12 @@ const handleSubmit = async (e) => {
       <div className="auth-black-panel">
         <div className="panel-inner">
           <div className="hero-text">
-            <h1>Join the <br/>Future of Waste Management.</h1>
-            <p>Create your account and manage your waste efficiently.</p>
+            <h1>Waste <br/>Collection.</h1>
+            <p>Eco-friendly waste management solutions.</p>
           </div>
           <div className="panel-footer">
             <div className="security-tag">
-              <ShieldCheck size={18}/> <span>Secured By Cynite Technologies</span>
+              <ShieldCheck size={18}/> <span>Enterprise Grade Security</span>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ const handleSubmit = async (e) => {
                 <User size={18} className="icon-lead"/>
                 <input 
                   type="text" 
-                  placeholder="John Doe" 
+                  placeholder="Joe" 
                   required 
                   onChange={(e) => setFormData({...formData, full_name: e.target.value})}
                 />

@@ -87,7 +87,7 @@ export default function AdminTransactions() {
           <div className="balance-card">
             <div className="card-glass"></div>
             <p>System Wallet Balance</p>
-            <h2>{currency}{stats.balance.toLocaleString()}</h2>
+            <h2>{currency}{stats.income.toLocaleString()}</h2>
             <div className="card-footer">
               <span>ADMIN CORE</span>
               <Wallet size={20}/>

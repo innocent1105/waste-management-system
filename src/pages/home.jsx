@@ -109,8 +109,8 @@ useEffect(() => {
                                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Albert" alt="User" />
                                 </div>
                                 <div className="user-info-meta">
-                                    <span className="u-name">John Doe</span>
-                                    <span className="u-status">Premium User</span>
+                                    <span className="u-name"></span>
+                                    <span className="u-status"></span>
                                 </div>
                             </div>
                         </div>
